@@ -21,14 +21,17 @@ const getEmpruntHistoric = (req, res) => {
 
 //Effacer historique
 const deleteHistoric = (req, res) => {
-    const { idEmprunteur, idSalle, idMateriel, debutEmprunt } = req.body
+    const idEmprunteur = parseInt(req.params.idEmprunteur)
+    const idSalle = parseInt(req.params.idSalle)
+    const idMateriel = parseInt(req.params.idMateriel)
+    const debutEmprunt = req.params.debutEmprunt
     // Supprimer la réparation
     connection.query('DELETE FROM emprunt WHERE (idEmprunteur = (?) AND idSalle = (?) AND idMateriel = (?) AND debutEmprunt = (?))', [idEmprunteur, idSalle, idMateriel, debutEmprunt], (errDelete, resultsDelete) => {
         if (errDelete) {
             return res.status(500).json({ message: 'Une erreur s\'est produite lors de la suppression de l\'emprunt.' });
         }
 
-        res.status(200).json({ message: 'Historique emprunt supprimée avec succès et disponibilité mise à jour.' });
+        res.status(200).json({ message: 'Historique emprunt supprimée' });
     });
 }
 
@@ -102,7 +105,10 @@ const updateEmprunt = (req, res) => {
 
 //Suppression
 const deleteEmprunt = (req, res) => { 
-    const { idEmprunteur, idSalle, idMateriel, debutEmprunt } = req.body
+    const idEmprunteur = parseInt(req.params.idEmprunteur)
+    const idSalle = parseInt(req.params.idSalle)
+    const idMateriel = parseInt(req.params.idMateriel)
+    const debutEmprunt = req.params.debutEmprunt
 
     // Mettre à jour la disponibilité du matériel
     connection.query('UPDATE materiel SET disponibilite = 1 WHERE idMateriel = ?', [idMateriel], (errUpdate, resultsUpdate) => {

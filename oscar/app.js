@@ -76,8 +76,8 @@ app.get('/emprunt', emprunt.getEmprunt)
 app.post('/emprunt', emprunt.createEmprunt)
 app.put('/emprunt', emprunt.updateEmprunt)
 app.put('/empruntFin',emprunt.finEmprunt)
-app.delete('/emprunt', emprunt.deleteEmprunt)
-app.get('/empruntHistoric', emprunt.getEmpruntHistoric)
+app.delete('/emprunt/:idEmprunteur/:idSalle/:idMateriel/:debutEmprunt', emprunt.deleteEmprunt)
+app.get('/empruntHistoric/:idEmprunteur/:idSalle/:idMateriel/:debutEmprunt', emprunt.getEmpruntHistoric)
 app.delete('/empruntHistoric', emprunt.deleteHistoric)
 
 //Ecoute sur le port
